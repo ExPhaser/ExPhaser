@@ -3,6 +3,9 @@ export default class Intro extends Phaser.Scene {
   private _logo: Phaser.GameObjects.Image;
   private _play: Phaser.GameObjects.BitmapText;
 
+  private _cubes: Phaser.GameObjects.TileSprite;
+  private _counter: number = 0;
+
   constructor() {
     super({
       key: "Intro",
@@ -10,47 +13,31 @@ export default class Intro extends Phaser.Scene {
   }
   create() {
 
-    this.cameras.main.setBackgroundColor("#000000");
+
+    this._cubes = this.add.tileSprite(0, 0, 1024, 600, "prova-bg").setOrigin(0)
+
+    //this.cameras.main.setBackgroundColor("#008201");
 
     let particles: Phaser.GameObjects.Particles.ParticleEmitterManager = this.add.particles("flares");
 
-    particles.createEmitter({
-      frame: "blue",
-      y: 0,
-      x: { min: 0, max: this.game.canvas.width },
-      lifespan: 10000,
-      speedY: { min: 250, max: 400 },
-      scale: { min: 0.05, max: 0.1 },
-      quantity: 1
+ 
 
-    })
+    
 
-    particles.createEmitter({
-      frame: "white",
-      y: 0,
-      x: { min: 0, max: this.game.canvas.width },
-      lifespan: 10000,
-      speedY: { min: 250, max: 400 },
-      scale: { min: 0.05, max: 0.1 },
-      quantity: 1
-
-    })
-
-
-    this._logo = this.add.image(this.game.canvas.width / 2, 50, "galaxian").setAlpha(0);
+    this._logo = this.add.image(this.game.canvas.width / 2, 200, "nuke").setAlpha(0).setScale(2);
     this.add.tween({
-      targets: this._logo, y: 150, alpha: 1, duration: 1000, ease: "quad.easeInOut",
+      targets: this._logo, y: 220, alpha: 1, duration: 1000, ease: "quad.easeInOut",
 
       onComplete: () => {
         this.add.tween({
-          targets: this._logo, y: 120, repeat: -1, yoyo: true, duration: 1000, ease: "quad.easeInOut",
+          targets: this._logo, y: 200, repeat: -1, yoyo: true, duration: 1000, ease: "quad.easeInOut",
         });
       }
     });
 
 
     this._play = this.add
-      .bitmapText(this.game.canvas.width / 2, 550, "arcade", "PLAY")
+      .bitmapText(this.game.canvas.width / 2, 500, "arcade", "PLAY")
       .setAlpha(1)
       .setOrigin(0.5)
       .setInteractive()
@@ -77,7 +64,11 @@ export default class Intro extends Phaser.Scene {
 
   }
 
-  update(time: number, delta: number): void { }
+  update(time: number, delta: number): void {
+    this._counter -= 0.01;
+    this._cubes.tilePositionX += Math.sin(this._counter) //* 3.5; //moltiplicatore per la velocità;
+    this._cubes.tilePositionY += Math.cos(this._counter) //* 3.5; //moltiplicatore per la velocità
+   }
 
-}
+  }
 
