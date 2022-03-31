@@ -87,8 +87,9 @@ export let GameData: any = {
   images: [
   
     { name: "bg", path: "assets/images/bg.jpg" },
-     { name: "galaxian", path: "assets/images/galaxian.png" }
-    
+    { name: "galaxian", path: "assets/images/galaxian.png" }
+    { name: "prova-bg", path: "assets/images/prova-bg.jpg" },
+    { name: "nuke", path: "assets/images/nuke.png" }
   
    
   ],
