@@ -24,7 +24,7 @@ export default class Intro extends Phaser.Scene {
 
     
 
-    this._logo = this.add.image(this.game.canvas.width / 2, 200, "nuke").setAlpha(0).setScale(2);
+    this._logo = this.add.image(this.game.canvas.width / 2, 200, "nuke").setAlpha(0).setScale(1.3);
     this.add.tween({
       targets: this._logo, y: 220, alpha: 1, duration: 1000, ease: "quad.easeInOut",
 
